@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-GB' }}" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}" />
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
+    <meta property="og:description" content="{{ page.description | default: site.description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
+    <meta name="twitter:description" content="{{ page.description | default: site.description }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  </head>
+  <body class="site-body {% if page.body_class %}{{ page.body_class }}{% endif %}">
+    <div class="d-flex min-vh-100 flex-column">
+      <header class="site-header sticky-top">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="siteNav">
+              <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a></li>
+                <li class="nav-item"><a class="nav-link {% if page.url == '/install/' %}active{% endif %}" href="{{ '/install/' | relative_url }}" {% if page.url == '/install/' %}aria-current="page"{% endif %}>Installation</a></li>
+                <li class="nav-item"><a class="nav-link {% if page.url == '/server/' %}active{% endif %}" href="{{ '/server/' | relative_url }}" {% if page.url == '/server/' %}aria-current="page"{% endif %}>Server Setup</a></li>
+                <li class="nav-item"><a class="nav-link {% if page.url == '/features/' %}active{% endif %}" href="{{ '/features/' | relative_url }}" {% if page.url == '/features/' %}aria-current="page"{% endif %}>Features</a></li>
+                <li class="nav-item"><a class="nav-link {% if page.url == '/faq/' %}active{% endif %}" href="{{ '/faq/' | relative_url }}" {% if page.url == '/faq/' %}aria-current="page"{% endif %}>FAQ</a></li>
+              </ul>
+              <div class="version-pill ms-lg-3 mt-3 mt-lg-0" data-version-status>
+                <span class="version-pill__dot"></span>
+                <span>Loading version status</span>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="site-main flex-grow-1">
+        {{ content }}
+      </main>
+
+      <footer class="site-footer py-5">
+        <div class="container">
+          <p class="mb-1">Thunder is open source. <a href="{{ site.pack_repo_url }}">View the pack repository</a>.</p>
+          <p class="mb-0 text-secondary">Docs live here. Pack metadata for packwiz lives at <code>packwiz.thunder.john.rooney.scot</code>.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      window.ThunderSiteConfig = {
+        releaseUrl: {{ site.release_url | jsonify }},
+        releaseApiUrl: {{ "https://api.github.com/repos/" | append: site.pack_repo_owner | append: "/" | append: site.pack_repo_name | append: "/releases/latest" | jsonify }},
+        packTomlUrl: {{ site.packwiz_site_url | append: "/pack.toml" | jsonify }},
+        indexTomlUrl: {{ site.packwiz_site_url | append: "/index.toml" | jsonify }},
+        rawPackTomlUrl: {{ site.pack_repo_raw_main | append: "/pack.toml" | jsonify }},
+        rawIndexTomlUrl: {{ site.pack_repo_raw_main | append: "/index.toml" | jsonify }}
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="{{ '/assets/site.js' | relative_url }}"></script>
+  </body>
+</html>
