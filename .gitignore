@@ -1,7 +1,10 @@
+# Local build folders
 _site/
 .jekyll-cache/
-.jekyll-metadata
 .sass-cache/
 .bundle-home/
 .bundle-config/
 vendor/
+
+# Local build files
+.jekyll-metadata

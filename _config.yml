@@ -9,7 +9,6 @@ plugins: []
 pack_repo_owner: rooneyj9005
 pack_repo_name: Thunder
 pack_repo_url: "https://github.com/rooneyj9005/Thunder"
-pack_repo_raw_main: "https://raw.githubusercontent.com/rooneyj9005/Thunder/main"
 packwiz_site_url: "https://packwiz.thunder.john.rooney.scot"
 release_url: "https://github.com/rooneyj9005/Thunder/releases"
 custom_domain: thunder.john.rooney.scot

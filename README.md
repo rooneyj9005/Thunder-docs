@@ -44,7 +44,7 @@ The site generally works best when contributors keep a few things in mind:
 
 The site is deployed separately from the pack repository through GitHub Pages.
 
-Dynamic metadata such as the latest release, pack version, and mod count is read from the main Thunder repository and the packwiz host. If those sources move, this repository usually needs to move with them.
+Dynamic metadata such as the latest stable release, pack version, and mod count is read from the stable GitHub release API and the packwiz host. If those sources move, this repository usually needs to move with them.
 
 ## Licence
 

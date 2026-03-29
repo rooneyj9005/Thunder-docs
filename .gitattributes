@@ -1,0 +1,21 @@
+# See: https://git-scm.com/docs/gitattributes
+* text=auto
+
+# Site source folders
+/assets/** text eol=lf
+/_layouts/** text eol=lf
+
+# Root text files
+/.gitattributes text eol=lf
+/.gitignore text eol=lf
+/CNAME text eol=lf
+/Gemfile text eol=lf
+/Gemfile.lock text eol=lf
+/LICENSE text eol=lf
+/README.md text eol=lf
+/_config.yml text eol=lf
+/faq.md text eol=lf
+/features.md text eol=lf
+/index.md text eol=lf
+/install.md text eol=lf
+/server.md text eol=lf

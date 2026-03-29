@@ -4,7 +4,7 @@
   var config = window.ThunderSiteConfig || {};
   var latestReleasePromise = null;
   var packTomlPromise = null;
-  var rawIndexPromise = null;
+  var indexTomlPromise = null;
 
   function fetchJson(url) {
     return fetch(url).then(function (response) {
@@ -47,16 +47,16 @@
 
   function fetchPackToml() {
     if (!packTomlPromise) {
-      packTomlPromise = fetchFirstText([config.packTomlUrl, config.rawPackTomlUrl]);
+      packTomlPromise = fetchFirstText([config.packTomlUrl]);
     }
     return packTomlPromise;
   }
 
-  function fetchRawIndexToml() {
-    if (!rawIndexPromise) {
-      rawIndexPromise = fetchFirstText([config.indexTomlUrl, config.rawIndexTomlUrl]);
+  function fetchIndexToml() {
+    if (!indexTomlPromise) {
+      indexTomlPromise = fetchFirstText([config.indexTomlUrl]);
     }
-    return rawIndexPromise;
+    return indexTomlPromise;
   }
 
   function countMods(indexTomlText) {
@@ -83,7 +83,7 @@
         if (asset && asset.browser_download_url) {
           link.href = asset.browser_download_url;
           if (label && release.tag_name) {
-            label.textContent = "Latest release: " + release.tag_name;
+            label.textContent = "Latest stable release: " + release.tag_name;
           }
           return;
         }
@@ -115,14 +115,14 @@
       if (releaseVersion && mainVersion) {
         target.dataset.state = releaseVersion === mainVersion ? "in-sync" : "out-of-sync";
         target.lastElementChild.textContent = releaseVersion === mainVersion
-          ? "Release " + releaseVersion + " is current"
-          : "Release " + releaseVersion + ", pack metadata " + mainVersion;
+          ? "Stable release " + releaseVersion + " is current"
+          : "Stable release " + releaseVersion + ", pack metadata " + mainVersion;
         return;
       }
 
       if (releaseVersion) {
         target.dataset.state = "release-only";
-        target.lastElementChild.textContent = "Latest release " + releaseVersion;
+        target.lastElementChild.textContent = "Latest stable release " + releaseVersion;
         return;
       }
 
@@ -147,7 +147,7 @@
       return Promise.resolve();
     }
 
-    return fetchRawIndexToml()
+    return fetchIndexToml()
       .then(function (indexTomlText) {
         var modCount = countMods(indexTomlText);
 

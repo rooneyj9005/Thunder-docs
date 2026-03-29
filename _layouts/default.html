@@ -63,9 +63,7 @@
         releaseUrl: {{ site.release_url | jsonify }},
         releaseApiUrl: {{ "https://api.github.com/repos/" | append: site.pack_repo_owner | append: "/" | append: site.pack_repo_name | append: "/releases/latest" | jsonify }},
         packTomlUrl: {{ site.packwiz_site_url | append: "/pack.toml" | jsonify }},
-        indexTomlUrl: {{ site.packwiz_site_url | append: "/index.toml" | jsonify }},
-        rawPackTomlUrl: {{ site.pack_repo_raw_main | append: "/pack.toml" | jsonify }},
-        rawIndexTomlUrl: {{ site.pack_repo_raw_main | append: "/index.toml" | jsonify }}
+        indexTomlUrl: {{ site.packwiz_site_url | append: "/index.toml" | jsonify }}
       };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

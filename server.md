@@ -60,7 +60,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
             <div class="card-body">
               <span class="step-badge mb-3">1</span>
               <h3 class="card-title h4">Import the egg</h3>
-              <p class="card-text mb-0">Download <code>pterodactyl.json</code> from the latest Thunder release and import it through your panel.</p>
+              <p class="card-text mb-0">Download <code>pterodactyl.json</code> from the latest stable Thunder release and import it through your panel.</p>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
     <div class="card-body">
       <span class="section-eyebrow">Standalone Windows</span>
       <h2 class="section-title mb-3">Run the PowerShell installer in an empty folder</h2>
-      <p class="page-lead mb-3">If Java is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
+      <p class="page-lead mb-3">If Java 21 is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
       <pre class="thunder-code mb-3"><code>.\install.ps1
 Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
 .\startup.ps1</code></pre>
