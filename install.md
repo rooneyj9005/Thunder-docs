@@ -104,7 +104,9 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
       </ol>
       <p class="muted-copy mb-3">That keeps your saves and settings in place while refreshing the pack itself.</p>
       <div class="thunder-callout">
-        <p class="mb-0">Windows users can wire in <code>powershell.exe -ExecutionPolicy Bypass -File update.ps1 -PackwizSide client</code> as a pre-launch command if they want a more automated setup. Linux or macOS client sync is still best treated as a custom arrangement rather than the official one-click route.</p>
+        <p class="mb-3">Windows users can wire in a Prism pre-launch command if they want a more automated setup:</p>
+        <pre class="thunder-code mb-3"><code>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$INST_MC_DIR\update.ps1" -PackwizSide client</code></pre>
+        <p class="mb-0">That works cleanly because <code>update.ps1</code> now defaults to its own folder when no directory is supplied, and will use Prism Launcher's <code>$INST_JAVA</code> binary automatically when it is available. Linux or macOS client sync is still best treated as a custom arrangement rather than the official one-click route.</p>
       </div>
     </div>
   </section>
