@@ -104,7 +104,7 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
       </ol>
       <p class="muted-copy mb-3">That keeps your saves and settings in place while refreshing the pack itself.</p>
       <div class="thunder-callout">
-        <p class="mb-0">Windows users can wire in <code>update.ps1 -PackwizSide client</code> as a pre-launch command if they want a more automated setup. Linux or macOS client sync is still best treated as a custom arrangement rather than the official one-click route.</p>
+        <p class="mb-0">Windows users can wire in <code>powershell.exe -ExecutionPolicy Bypass -File update.ps1 -PackwizSide client</code> as a pre-launch command if they want a more automated setup. Linux or macOS client sync is still best treated as a custom arrangement rather than the official one-click route.</p>
       </div>
     </div>
   </section>
