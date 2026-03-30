@@ -27,7 +27,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
         <div class="card thunder-card h-100">
           <div class="card-body">
             <h2 class="card-title h4 mb-3">Standalone Linux</h2>
-            <p class="card-text mb-0">If you already have Java 21, <code>curl</code>, and <code>jq</code>, the Linux installer gets you most of the way there in one command.</p>
+            <p class="card-text mb-0">If you have <code>curl</code>, the Linux installer gets you most of the way there in one command and can fetch a local Temurin 21 runtime if Java is missing.</p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
             <div class="card-body">
               <span class="step-badge mb-3">2</span>
               <h3 class="card-title h4">Create the server</h3>
-              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and allocate memory according to the sort of player count you expect.</p>
+              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and set the panel memory to match the sort of player count you expect. The startup script will derive a heap from that automatically unless you fill in <code>Exact JVM Memory</code>.</p>
             </div>
           </div>
         </div>
@@ -90,9 +90,9 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
     <div class="card-body">
       <span class="section-eyebrow">Standalone Linux</span>
       <h2 class="section-title mb-3">Bootstrap a server with one command</h2>
-      <p class="page-lead mb-3">You need <strong>curl</strong>, <strong>jq</strong>, and <strong>Java 21</strong>. After that, the official installer does the rest.</p>
+      <p class="page-lead mb-3">You need <strong>curl</strong> and a normal Linux userspace with <strong>tar</strong> and <strong>gzip</strong>. If Java 17 or 21 is missing, the installer fetches a local Temurin 21 runtime for you.</p>
       <pre class="thunder-code mb-3"><code>mkdir thunder-server &amp;&amp; cd thunder-server &amp;&amp; curl -sSfLO https://github.com/rooneyj9005/Thunder/releases/latest/download/install.sh &amp;&amp; bash install.sh</code></pre>
-      <p class="muted-copy mb-0">After accepting the EULA, start the server with <code>bash startup.sh</code>.</p>
+      <p class="muted-copy mb-0">After accepting the EULA, start the server with <code>bash startup.sh</code>. If you want the script to size the heap from a known server allocation, use <code>bash startup.sh --memory 8192</code>. If you want a fixed heap instead, use <code>bash startup.sh --jvm-memory 7168</code>.</p>
     </div>
   </section>
 
@@ -100,11 +100,11 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
     <div class="card-body">
       <span class="section-eyebrow">Standalone Windows</span>
       <h2 class="section-title mb-3">Run the PowerShell installer in an empty folder</h2>
-      <p class="page-lead mb-3">If Java 21 is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
+      <p class="page-lead mb-3">If Java 17 or 21 is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
       <pre class="thunder-code mb-3"><code>.\install.ps1
 Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
 .\startup.ps1</code></pre>
-      <p class="muted-copy mb-0">That gives you the same general flow as Linux without needing a separate Java install first.</p>
+      <p class="muted-copy mb-0">That gives you the same general flow as Linux without needing a separate Java install first. Optional memory control works the same way here: <code>.\startup.ps1 -MemoryMiB 8192</code> derives a heap from the total server allocation, while <code>.\startup.ps1 -JvmMemoryMiB 7168</code> pins the heap exactly.</p>
     </div>
   </section>
 
