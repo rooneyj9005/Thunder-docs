@@ -10,6 +10,9 @@ The pack itself lives in the main [`Thunder`](https://github.com/rooneyj9005/Thu
 
 Contributors will usually want Bundler, Jekyll, and a local preview of the site.
 
+CI follows the Ruby version in `.ruby-version`, so using the same version locally is the safest way to avoid odd Bundler or Jekyll mismatches. At the moment that means Ruby 3.3.11.
+On native Windows, a fresh RubyInstaller setup may also need `ridk install` before `bundle install` can compile native gems cleanly.
+
 These commands are often the simplest starting points:
 
 ```bash
@@ -21,6 +24,12 @@ If a static build is enough, this is usually the simpler option:
 
 ```bash
 bundle exec jekyll build
+```
+
+If you refresh `Gemfile.lock` on Windows, add the Linux platform back before committing:
+
+```bash
+bundle lock --add-platform x86_64-linux
 ```
 
 ## What Lives Here
