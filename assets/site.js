@@ -1,7 +1,22 @@
 "use strict";
 
 (function () {
-  var config = window.ThunderSiteConfig || {};
+  function loadConfig() {
+    var node = document.getElementById("thunder-site-config");
+
+    if (node) {
+      return {
+        releaseUrl: node.getAttribute("data-release-url") || "",
+        releaseApiUrl: node.getAttribute("data-release-api-url") || "",
+        packTomlUrl: node.getAttribute("data-pack-toml-url") || "",
+        indexTomlUrl: node.getAttribute("data-index-toml-url") || ""
+      };
+    }
+
+    return window.ThunderSiteConfig || {};
+  }
+
+  var config = loadConfig();
   var latestReleasePromise = null;
   var packTomlPromise = null;
   var indexTomlPromise = null;

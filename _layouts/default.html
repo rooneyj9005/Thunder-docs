@@ -58,14 +58,14 @@
       </footer>
     </div>
 
-    <script>
-      window.ThunderSiteConfig = {
-        releaseUrl: {{ site.release_url | jsonify }},
-        releaseApiUrl: {{ "https://api.github.com/repos/" | append: site.pack_repo_owner | append: "/" | append: site.pack_repo_name | append: "/releases/latest" | jsonify }},
-        packTomlUrl: {{ site.packwiz_site_url | append: "/pack.toml" | jsonify }},
-        indexTomlUrl: {{ site.packwiz_site_url | append: "/index.toml" | jsonify }}
-      };
-    </script>
+    <script
+      id="thunder-site-config"
+      type="application/json"
+      data-release-url="{{ site.release_url | escape }}"
+      data-release-api-url="{{ 'https://api.github.com/repos/' | append: site.pack_repo_owner | append: '/' | append: site.pack_repo_name | append: '/releases/latest' | escape }}"
+      data-pack-toml-url="{{ site.packwiz_site_url | append: '/pack.toml' | escape }}"
+      data-index-toml-url="{{ site.packwiz_site_url | append: '/index.toml' | escape }}"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="{{ '/assets/site.js' | relative_url }}"></script>
   </body>
