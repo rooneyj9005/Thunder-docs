@@ -9,7 +9,7 @@ description: "What's in the Thunder modpack: technology, magic, building, explor
     <div class="card-body">
       <span class="section-eyebrow">Pack shape</span>
       <h1 class="page-title mb-3">What's in the pack</h1>
-      <p class="page-lead mb-0"><span data-mod-count>127</span> mods, organised by what they let you do rather than what they are called. Here is the shape of the thing.</p>
+      <p class="page-lead mb-0"><span data-mod-count>128</span> mods, organised by what they let you do rather than what they are called. Here is the shape of the thing.</p>
     </div>
   </section>
 

@@ -20,7 +20,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-ram" aria-expanded="true" aria-controls="faq-ram">How much RAM do I need?</button>
         </h2>
         <div id="faq-ram" class="accordion-collapse collapse show" aria-labelledby="faq-heading-ram" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">Give Minecraft at least 6 GB, ideally 8 GB. That is enough for Thunder's current <span data-mod-count>127</span>-mod shape without getting silly. Do not go beyond 10 GB unless you have a real reason.</div>
+          <div class="accordion-body">Give Minecraft at least 6 GB, ideally 8 GB. That is enough for Thunder's current <span data-mod-count>128</span>-mod shape without getting silly. Do not go beyond 10 GB unless you have a real reason.</div>
         </div>
       </div>
 

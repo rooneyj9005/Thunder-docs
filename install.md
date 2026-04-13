@@ -76,7 +76,7 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
         </div>
       </div>
       <div class="thunder-callout mt-4">
-        <p class="mb-0">The first launch takes longer because it is fetching <span data-mod-count>127</span> mods. That is normal. Make a cup of tea and let it finish.</p>
+        <p class="mb-0">The first launch takes longer because it is fetching <span data-mod-count>128</span> mods. That is normal. Make a cup of tea and let it finish.</p>
       </div>
     </div>
   </section>
