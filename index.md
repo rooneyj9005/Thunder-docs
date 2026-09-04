@@ -12,7 +12,7 @@ description: Thunder is a Forge modpack for playing with your mates. Tech, magic
       <p class="hero-copy mb-0">
         A modpack for playing with your mates. Build daft factories, sling
         spells, make lovely bases, and wander off into a world that feels worth
-        exploring. <span data-mod-count>128</span> mods, all tested, all
+        exploring. <span data-mod-count>130</span> mods, all tested, all
         stable.
       </p>
       <div class="d-flex flex-column flex-sm-row gap-3 mt-4">

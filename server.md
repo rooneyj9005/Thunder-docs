@@ -9,7 +9,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
     <div class="card-body">
       <span class="section-eyebrow">Hosting</span>
       <h1 class="page-title mb-3">Server Setup</h1>
-      <p class="page-lead mb-0">Want to host Thunder for your group? Here is how to get a server running without making a meal of it.</p>
+      <p class="page-lead mb-0">Want to host Thunder for your group? Here is how to get a server running without making a meal of it. Give the server at least 6 GB of memory, whichever route you take.</p>
     </div>
   </section>
 
@@ -69,7 +69,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
             <div class="card-body">
               <span class="step-badge mb-3">2</span>
               <h3 class="card-title h4">Create the server</h3>
-              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and set the panel memory to match the sort of player count you expect. The startup script will derive a heap from that automatically unless you fill in <code>Exact JVM Memory</code>.</p>
+              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and allocate at least 6 GB of panel memory, with more if you expect a busy server. The startup script will derive a heap from that automatically unless you fill in <code>Exact JVM Memory</code>.</p>
             </div>
           </div>
         </div>

@@ -13,10 +13,29 @@
   --thunder-gold: #d5b767;
   --thunder-danger: #ca7a7a;
   --thunder-shadow: 0 22px 55px rgba(0, 0, 0, 0.26);
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -3.5rem;
+  z-index: 1080;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  background: var(--thunder-accent);
+  color: #10210b;
+  font-weight: 600;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+  color: #10210b;
 }
 
 body.site-body {
@@ -402,5 +421,20 @@ h3 {
   .hero-panel .card-body,
   .thunder-card .card-body {
     padding: 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

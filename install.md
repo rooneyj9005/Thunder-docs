@@ -27,7 +27,7 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
         <div class="card thunder-card h-100">
           <div class="card-body">
             <h2 class="card-title h4 mb-3">Java</h2>
-            <p class="card-text mb-0">Java 21 is required. Most launchers sort this out for you without any drama.</p>
+            <p class="card-text mb-0">Java 17 or 21 both work. Most launchers sort this out for you without any drama.</p>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
         </div>
       </div>
       <div class="thunder-callout mt-4">
-        <p class="mb-0">The first launch takes longer because it is fetching <span data-mod-count>128</span> mods. That is normal. Make a cup of tea and let it finish.</p>
+        <p class="mb-0">The first launch takes longer because it is fetching <span data-mod-count>130</span> mods. That is normal. Make a cup of tea and let it finish.</p>
       </div>
     </div>
   </section>
@@ -104,9 +104,7 @@ description: Install Thunder with Prism Launcher or another Modrinth-compatible 
       </ol>
       <p class="muted-copy mb-3">That keeps your saves and settings in place while refreshing the pack itself.</p>
       <div class="thunder-callout">
-        <p class="mb-3">Windows users can wire in a Prism pre-launch command if they want a more automated setup:</p>
-        <pre class="thunder-code mb-3"><code>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$INST_MC_DIR\update.ps1" -PackwizSide client</code></pre>
-        <p class="mb-0">That works cleanly because <code>update.ps1</code> now defaults to its own folder when no directory is supplied, and will use Prism Launcher's <code>$INST_JAVA</code> binary automatically when it is available. Linux or macOS client sync is still best treated as a custom arrangement rather than the official one-click route.</p>
+        <p class="mb-0">The latest release always lives at the same address: <code>https://github.com/rooneyj9005/Thunder/releases/latest/download/Thunder.mrpack</code>. If your launcher can add or track a modpack by URL rather than a local file, point it there and it will always resolve to the current version.</p>
       </div>
     </div>
   </section>
