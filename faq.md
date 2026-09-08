@@ -9,7 +9,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
     <div class="card-body">
       <span class="section-eyebrow">Common questions</span>
       <h1 class="page-title mb-3">Frequently asked questions</h1>
-      <p class="page-lead mb-0">If your question is not here, open an issue on the pack repository and include the relevant log. Guesswork helps nobody.</p>
+      <p class="page-lead mb-0">If your question is not here, <a href="{{ site.pack_repo_url }}/issues">open an issue on the pack repository</a> and include the relevant log. Guesswork helps nobody.</p>
     </div>
   </section>
 
@@ -21,6 +21,15 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
         </h2>
         <div id="faq-ram" class="accordion-collapse collapse show" aria-labelledby="faq-heading-ram" data-bs-parent="#faqAccordion">
           <div class="accordion-body">Give Minecraft at least 6 GB, ideally 8 GB. That is enough for Thunder's current <span data-mod-count>130</span>-mod shape without getting silly. Do not go beyond 10 GB unless you have a real reason.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq-heading-version">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-version" aria-expanded="false" aria-controls="faq-version">What Minecraft version does Thunder run on?</button>
+        </h2>
+        <div id="faq-version" class="accordion-collapse collapse" aria-labelledby="faq-heading-version" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Minecraft 1.20.1 on Forge 47.4.13. Other Minecraft versions are not supported, and neither are Fabric, NeoForge or Quilt.</div>
         </div>
       </div>
 
@@ -47,7 +56,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-config" aria-expanded="false" aria-controls="faq-config">Will my config edits survive updates?</button>
         </h2>
         <div id="faq-config" class="accordion-collapse collapse" aria-labelledby="faq-heading-config" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">If you edit a path the pack already indexes, packwiz can restore the pack version of that exact file on sync. If you add a separate non-indexed file next to it, that separate file is usually left alone.</div>
+          <div class="accordion-body">If you edit a path the pack already indexes, packwiz can restore the pack version of that exact file on sync. If you add a separate non-indexed file next to it, that separate file is usually left alone. Two indexed files are the exception: your server list in <code>servers.dat</code> and the log filter in <code>config/logbegone.toml</code> are only written on a fresh install, so your edits to those stay put.</div>
         </div>
       </div>
 
@@ -56,7 +65,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-update" aria-expanded="false" aria-controls="faq-update">How do I update to a new version?</button>
         </h2>
         <div id="faq-update" class="accordion-collapse collapse" aria-labelledby="faq-heading-update" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">For client installs, the easiest route is to download the new <code>.mrpack</code> and use <strong>Update from file</strong> in Prism Launcher. For servers, use the official startup scripts and let packwiz sync before launch.</div>
+          <div class="accordion-body">For client installs, the easiest route is to download the new <code>.mrpack</code> and use <strong>Update from file</strong> in Prism Launcher. For servers, run <code>PACKWIZ_SIDE=server bash tools/update.sh</code> on Linux or <code>.\tools\update.ps1 -PackwizSide server</code> on Windows, or set <code>PACKWIZ_AUTO_UPDATE=true</code> to sync on every start.</div>
         </div>
       </div>
 
@@ -65,7 +74,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-updater" aria-expanded="false" aria-controls="faq-updater">Is the auto-updater safe?</button>
         </h2>
         <div id="faq-updater" class="accordion-collapse collapse" aria-labelledby="faq-heading-updater" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">It syncs the published pack metadata and the exact indexed files that belong to the pack. If you want complete manual control, you can disable sync for a run, but that means you are choosing to diverge from the official pack state.</div>
+          <div class="accordion-body">It syncs the published pack metadata and the exact indexed files that belong to the pack. It is off by default, so restarting a server never changes your mod set on its own. Turn it on with <code>PACKWIZ_AUTO_UPDATE=true</code> when you want the server to follow the published pack, and leave it off if you would rather update deliberately.</div>
         </div>
       </div>
 
@@ -92,7 +101,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-voice" aria-expanded="false" aria-controls="faq-voice">Does voice chat work automatically?</button>
         </h2>
         <div id="faq-voice" class="accordion-collapse collapse" aria-labelledby="faq-heading-voice" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">Yes, provided the server is running the pack properly and UDP traffic is allowed on the configured voice port.</div>
+          <div class="accordion-body">Yes, provided the server is running the pack properly and UDP traffic is allowed on the configured voice port. Server owners can switch it off with <code>ENABLE_VOICE_CHAT=false</code>, which binds the voice server to <code>127.0.0.1</code> and leaves the rest of its config file alone.</div>
         </div>
       </div>
 
@@ -106,11 +115,29 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
       </div>
 
       <div class="accordion-item">
+        <h2 class="accordion-header" id="faq-heading-firstlaunch">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-firstlaunch" aria-expanded="false" aria-controls="faq-firstlaunch">Why does the first launch take so long?</button>
+        </h2>
+        <div id="faq-firstlaunch" class="accordion-collapse collapse" aria-labelledby="faq-heading-firstlaunch" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">It is fetching <span data-mod-count>130</span> mods and building the model and recipe caches for all of them. Later launches are much quicker. Give the first one a few minutes before deciding something has gone wrong.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
         <h2 class="accordion-header" id="faq-heading-performance">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-performance" aria-expanded="false" aria-controls="faq-performance">The game runs, but it feels laggy. What should I try?</button>
         </h2>
         <div id="faq-performance" class="accordion-collapse collapse" aria-labelledby="faq-heading-performance" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">Check RAM allocation first, keep it around 8 GB, drop render distance if needed, and do not mistake first-launch stutter for normal performance. If you have bolted extra mods on top, remove them before blaming the base pack.</div>
+          <div class="accordion-body">Check RAM allocation first and keep it around 8 GB, then drop render distance and simulation distance. Simulation distance is the expensive one, because it decides how many chunks are actively ticked and this pack is full of block entities. Keep both nearer 12 than 32. Do not mistake first-launch stutter for normal performance. If you have bolted extra mods on top, remove them before blaming the base pack.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq-heading-cost">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-cost" aria-expanded="false" aria-controls="faq-cost">Does Thunder cost anything?</button>
+        </h2>
+        <div id="faq-cost" class="accordion-collapse collapse" aria-labelledby="faq-heading-cost" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">No. Nothing is sold, nothing is monetised, and there are no adverts anywhere. Thunder exists because it is a good modpack worth sharing.</div>
         </div>
       </div>
     </div>

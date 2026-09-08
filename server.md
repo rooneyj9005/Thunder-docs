@@ -19,7 +19,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
         <div class="card thunder-card h-100">
           <div class="card-body">
             <h2 class="card-title h4 mb-3">Panel hosting</h2>
-            <p class="card-text mb-0">Use the published <code>pterodactyl.json</code> egg, keep the packwiz URL in place, and let the startup scripts handle sync.</p>
+            <p class="card-text mb-0">Use the published <code>pterodactyl.json</code> egg, keep the packwiz URL in place, and switch <code>Auto Update</code> on if you want the server to follow the published pack.</p>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
             <div class="card-body">
               <span class="step-badge mb-3">3</span>
               <h3 class="card-title h4">Start it</h3>
-              <p class="card-text mb-0">The egg installs Forge, then runs startup with sync enabled so the pack stays aligned with the published metadata.</p>
+              <p class="card-text mb-0">The egg installs Forge and does the first pack sync. After that, startup leaves your mod set alone unless you switch <code>Auto Update</code> on.</p>
             </div>
           </div>
         </div>
@@ -91,8 +91,8 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
       <span class="section-eyebrow">Standalone Linux</span>
       <h2 class="section-title mb-3">Bootstrap a server with one command</h2>
       <p class="page-lead mb-3">You need <strong>curl</strong> and a normal Linux userspace with <strong>tar</strong> and <strong>gzip</strong>. If Java 17 or 21 is missing, the installer fetches a local Temurin 21 runtime for you.</p>
-      <pre class="thunder-code mb-3"><code>mkdir thunder-server &amp;&amp; cd thunder-server &amp;&amp; curl -sSfLO https://github.com/rooneyj9005/Thunder/releases/latest/download/install.sh &amp;&amp; bash install.sh</code></pre>
-      <p class="muted-copy mb-0">After accepting the EULA, start the server with <code>bash startup.sh</code>. If you want the script to size the heap from a known server allocation, use <code>bash startup.sh --memory 8192</code>. If you want a fixed heap instead, use <code>bash startup.sh --jvm-memory 7168</code>.</p>
+      <pre class="thunder-code mb-3"><code>mkdir thunder-server &amp;&amp; cd thunder-server &amp;&amp; curl -sSfL -O https://github.com/rooneyj9005/Thunder/releases/latest/download/install.sh -O https://github.com/rooneyj9005/Thunder/releases/latest/download/functions.sh &amp;&amp; bash install.sh</code></pre>
+      <p class="muted-copy mb-0">Accept the EULA with <code>echo eula=true &gt; eula.txt</code>, then start the server with <code>bash startup.sh</code>. If you want the script to size the heap from a known server allocation, use <code>bash startup.sh --memory 8192</code>. If you want a fixed heap instead, use <code>bash startup.sh --jvm-memory 7168</code>.</p>
     </div>
   </section>
 
@@ -101,10 +101,23 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
       <span class="section-eyebrow">Standalone Windows</span>
       <h2 class="section-title mb-3">Run the PowerShell installer in an empty folder</h2>
       <p class="page-lead mb-3">If Java 17 or 21 is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
-      <pre class="thunder-code mb-3"><code>.\install.ps1
+      <pre class="thunder-code mb-3"><code>Invoke-WebRequest -Uri https://github.com/rooneyj9005/Thunder/releases/latest/download/install.ps1 -OutFile install.ps1
+.\install.ps1
 Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
 .\startup.ps1</code></pre>
       <p class="muted-copy mb-0">That gives you the same general flow as Linux without needing a separate Java install first. Optional memory control works the same way here: <code>.\startup.ps1 -MemoryMiB 8192</code> derives a heap from the total server allocation, while <code>.\startup.ps1 -JvmMemoryMiB 7168</code> pins the heap exactly.</p>
+    </div>
+  </section>
+
+  <section class="card thunder-card mb-4">
+    <div class="card-body">
+      <span class="section-eyebrow">Keeping up to date</span>
+      <h2 class="section-title mb-3">Your server updates when you say so</h2>
+      <p class="page-lead mb-3">Sync is off by default, so restarting will not change your mod set. No surprises mid-session.</p>
+      <p class="muted-copy mb-3">To update once, run the bundled script from the server folder. On Linux that is <code>PACKWIZ_SIDE=server bash tools/update.sh</code>. On Windows it is <code>.\tools\update.ps1 -PackwizSide server</code>.</p>
+      <div class="thunder-callout">
+        <p class="mb-0">To sync on every start instead, set <code>PACKWIZ_AUTO_UPDATE=true</code>, or switch <strong>Auto Update</strong> on in your panel. Players update separately: they download the new <code>.mrpack</code> and use <strong>Update from file</strong>.</p>
+      </div>
     </div>
   </section>
 
@@ -125,6 +138,7 @@ Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
         <li>If a specific path is listed in <code>index.toml</code>, packwiz can restore the pack version of that exact file on sync.</li>
         <li>If another file sits next to it but is not indexed, packwiz generally leaves that file alone.</li>
         <li>So "this folder contains managed files" is not the same thing as "everything in this folder belongs to the pack".</li>
+        <li>Two indexed files are only ever written once: <code>servers.dat</code> and <code>config/logbegone.toml</code>. Sync leaves them alone after the first install, so your edits there survive updates.</li>
       </ul>
       <div class="thunder-callout">
         <p class="mb-0">If you disable updates and customise pack-managed files, you are effectively keeping a local fork. That can be perfectly reasonable, but it stops being the official pack state.</p>
