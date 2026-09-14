@@ -110,7 +110,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-optifine" aria-expanded="false" aria-controls="faq-optifine">Is OptiFine supported?</button>
         </h2>
         <div id="faq-optifine" class="accordion-collapse collapse" aria-labelledby="faq-heading-optifine" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">No. OptiFine and modern Forge mod stacks rarely get on well. If you want shaders, use the supported shader route rather than trying to wedge OptiFine into the pack.</div>
+          <div class="accordion-body">No. OptiFine and modern Forge mod stacks rarely get on well. Thunder has no shader route yet either, so there is nothing to point you at instead. Adding one is on the list.</div>
         </div>
       </div>
 
