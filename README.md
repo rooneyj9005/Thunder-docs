@@ -2,25 +2,22 @@
 
 This repository contains the public Thunder website published at [thunder.john.rooney.scot](https://thunder.john.rooney.scot/).
 
-It is mainly for contributors working on the site itself. Anyone who simply wants installation help, server setup guidance, feature overviews, or FAQ answers will almost certainly want the live site rather than this repository.
+It is for contributors working on the site itself. Anyone after installation help, server setup guidance, feature overviews, or FAQ answers wants the live site instead.
 
 The pack itself lives in the main [`Thunder`](https://github.com/rooneyj9005/Thunder) repository. Pack metadata for packwiz is served separately from `https://packwiz.thunder.john.rooney.scot/`.
 
 ## Contributing to the Site
 
-Contributors will usually want Bundler, Jekyll, and a local preview of the site.
+You need Bundler, Jekyll, and a local preview.
 
-CI follows the Ruby version in `.ruby-version`, so using the same version locally is the safest way to avoid odd Bundler or Jekyll mismatches. At the moment that means Ruby 3.3.11.
-On native Windows, a fresh RubyInstaller setup may also need `ridk install` before `bundle install` can compile native gems cleanly.
-
-These commands are often the simplest starting points:
+CI reads the Ruby version from `.ruby-version`, currently 3.3.11. Matching it locally avoids Bundler and Jekyll mismatches. On native Windows, a fresh RubyInstaller setup needs `ridk install` before `bundle install` can compile native gems.
 
 ```bash
 bundle install
 bundle exec jekyll serve --livereload
 ```
 
-If a static build is enough, this is usually the simpler option:
+For a static build without the preview server:
 
 ```bash
 bundle exec jekyll build
@@ -34,26 +31,24 @@ bundle lock --add-platform x86_64-linux
 
 ## What Lives Here
 
-- `_layouts/default.html` contains the shared page shell.
-- `assets/site.css` contains the Thunder-specific site styling on top of the Bootstrap base.
-- `assets/site.js` handles release links, version status, and mod counts.
-- `index.md`, `install.md`, `server.md`, `features.md`, and `faq.md` are the main content pages.
+- `_layouts/default.html` is the shared page shell.
+- `assets/site.css` layers the Thunder styling over the Bootstrap base.
+- `assets/site.js` fills in the release note, the version status, and the mod counts.
+- `index.md`, `install.md`, `server.md`, `features.md`, and `faq.md` are the content pages.
 
 ## Contributor Notes
 
-The site generally works best when contributors keep a few things in mind:
-
-- British English is the expected default.
-- The tone should stay lively, concrete, and practical rather than generic or overly polished.
-- The live site should remain friendlier than the repository for players and server owners.
-- Install, update, server, and release behaviour should stay aligned with the main Thunder repository.
-- The docs site and the packwiz host are separate on purpose, so references to metadata URLs are worth checking carefully.
+- British English throughout.
+- Keep the tone lively, concrete, and practical. Generic or over-polished copy is worse than none.
+- The live site stays friendlier than this repository. Players and server owners read that; contributors read this.
+- Install, update, server, and release behaviour must match the main Thunder repository.
+- The docs site and the packwiz host are separate on purpose. Check metadata URLs against that split.
 
 ## Deployment and Data Sources
 
-The site is deployed separately from the pack repository through GitHub Pages.
+The site deploys through GitHub Pages, separately from the pack repository.
 
-Dynamic metadata such as the latest stable release, pack version, and mod count is read from the stable GitHub release API and the packwiz host. If those sources move, this repository usually needs to move with them.
+The pack version, the version status, and the mod count are read at runtime from the packwiz host, out of its `pack.toml` and `index.toml`. Nothing here calls the GitHub API: it is one shared runner address away from its rate limit, and a 403 used to reach visitors. The download button is a plain release asset URL in the markup, so it is right before the script runs and while the host is unreachable. Every value baked into the markup is a fallback. If the packwiz host moves, this repository moves with it.
 
 ## Licence
 

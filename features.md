@@ -77,7 +77,7 @@ description: "What's in the Thunder modpack: technology, magic, building, explor
           <h2 class="section-title mb-3">Less faff, better multiplayer</h2>
           <p class="card-text">A big modpack needs the boring little improvements as much as the headline toys.</p>
           <ul class="list-copy mb-0">
-            <li><strong>JEI</strong> and <strong>Jade</strong> keep the pack readable instead of leaving you to guess recipes and block behaviour.</li>
+            <li><strong>JEI</strong> shows you every recipe and <strong>Jade</strong> tells you what you are looking at, so the pack stays readable.</li>
             <li><strong>Waystones</strong>, <strong>Xaero's maps</strong>, <strong>Sophisticated Backpacks</strong>, and <strong>Lootr</strong> make ordinary play much less tedious.</li>
             <li><strong>Simple Voice Chat</strong> means people can just talk in-game instead of vanishing into another app every five minutes.</li>
           </ul>

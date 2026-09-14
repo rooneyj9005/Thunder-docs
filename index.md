@@ -95,7 +95,7 @@ description: Thunder is a Forge modpack for playing with your mates. Tech, magic
       <div class="text-center mb-5">
         <span class="section-eyebrow">Get playing quickly</span>
         <h2 class="section-title mb-2">Up and running in about two minutes</h2>
-        <p class="section-copy mx-auto mb-0">No scavenger hunt for jar files. No manual mod wrangling. Just import the pack and let the launcher get on with it.</p>
+        <p class="section-copy mx-auto mb-0">Import the pack and the launcher does the rest. You will not be hunting down jar files or wiring mods together by hand.</p>
       </div>
       <div class="row g-4">
         <div class="col-md-4">
