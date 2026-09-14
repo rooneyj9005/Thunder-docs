@@ -9,7 +9,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
     <div class="card-body">
       <span class="section-eyebrow">Hosting</span>
       <h1 class="page-title mb-3">Server Setup</h1>
-      <p class="page-lead mb-0">Want to host Thunder for your group? Here is how to get a server running without making a meal of it. Give the server at least 6 GB of memory, whichever route you take.</p>
+      <p class="page-lead mb-0">Want to host Thunder for your group? Here is how to get a server running without making a meal of it. Give the server at least 8 GB of memory, whichever route you take.</p>
     </div>
   </section>
 
@@ -69,7 +69,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
             <div class="card-body">
               <span class="step-badge mb-3">2</span>
               <h3 class="card-title h4">Create the server</h3>
-              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and allocate at least 6 GB of panel memory, with more if you expect a busy server. The startup script will derive a heap from that automatically unless you fill in <code>Exact JVM Memory</code>.</p>
+              <p class="card-text mb-0">Pick Java 21, keep the supplied packwiz URL, and allocate at least 8 GB of panel memory, with more if you expect a busy server. The startup script will derive a heap from that automatically unless you fill in <code>Exact JVM Memory</code>.</p>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
       <h2 class="section-title mb-3">Bootstrap a server with one command</h2>
       <p class="page-lead mb-3">You need <strong>curl</strong> and a normal Linux userspace with <strong>tar</strong> and <strong>gzip</strong>. If Java 17 or 21 is missing, the installer fetches a local Temurin 21 runtime for you.</p>
       <pre class="thunder-code mb-3"><code>mkdir thunder-server &amp;&amp; cd thunder-server &amp;&amp; curl -sSfL -O https://github.com/rooneyj9005/Thunder/releases/latest/download/install.sh -O https://github.com/rooneyj9005/Thunder/releases/latest/download/functions.sh &amp;&amp; bash install.sh</code></pre>
-      <p class="muted-copy mb-0">Accept the EULA with <code>echo eula=true &gt; eula.txt</code>, then start the server with <code>bash startup.sh</code>. If you want the script to size the heap from a known server allocation, use <code>bash startup.sh --memory 8192</code>. If you want a fixed heap instead, use <code>bash startup.sh --jvm-memory 7168</code>.</p>
+      <p class="muted-copy mb-0">Accept the EULA with <code>echo eula=true &gt; eula.txt</code>, then start the server with <code>bash startup.sh</code>. Left to itself the heap takes 75 per cent of whatever memory the script finds, and claims it at startup rather than creeping up on it over hours, so on a machine you share with anything else say what the server gets: <code>bash startup.sh --memory 8192</code> sizes the heap from a total allocation and holds back what the JVM needs outside it, while <code>bash startup.sh --jvm-memory 7168</code> pins the heap exactly.</p>
     </div>
   </section>
 
@@ -105,7 +105,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
 .\install.ps1
 Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
 .\startup.ps1</code></pre>
-      <p class="muted-copy mb-0">That gives you the same general flow as Linux without needing a separate Java install first. Optional memory control works the same way here: <code>.\startup.ps1 -MemoryMiB 8192</code> derives a heap from the total server allocation, while <code>.\startup.ps1 -JvmMemoryMiB 7168</code> pins the heap exactly.</p>
+      <p class="muted-copy mb-0">That gives you the same general flow as Linux without needing a separate Java install first. Memory behaves the same way, the same 75 per cent default included: <code>.\startup.ps1 -MemoryMiB 8192</code> derives a heap from the total server allocation, while <code>.\startup.ps1 -JvmMemoryMiB 7168</code> pins the heap exactly.</p>
     </div>
   </section>
 
