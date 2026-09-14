@@ -130,7 +130,6 @@ code {
   box-shadow: 0 0 0 0.35rem rgba(166, 211, 109, 0.14);
 }
 
-.version-pill[data-state="out-of-sync"] .version-pill__dot,
 .version-pill[data-state="release-only"] .version-pill__dot {
   background: var(--thunder-gold);
 }

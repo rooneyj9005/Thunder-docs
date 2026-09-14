@@ -16,10 +16,10 @@ description: Thunder is a Forge modpack for playing with your mates. Tech, magic
         stable.
       </p>
       <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
-        <a class="btn thunder-btn thunder-btn-primary btn-lg" data-download-link href="{{ site.release_url }}">Download latest</a>
+        <a class="btn thunder-btn thunder-btn-primary btn-lg" data-download-link href="{{ site.pack_repo_url }}/releases/latest/download/{{ site.release_asset_name }}">Download latest</a>
         <a class="btn thunder-btn thunder-btn-ghost btn-lg" href="{{ '/server/' | relative_url }}">Run a server</a>
       </div>
-      <p class="release-note mt-3 mb-0" data-download-version>Checking latest stable release</p>
+      <p class="release-note mt-3 mb-0" data-download-version role="status">{% if site.pack_version %}Latest stable release: v{{ site.pack_version }}{% else %}Latest stable release{% endif %}</p>
     </div>
     <div class="col-lg-5">
       <div class="card thunder-card hero-panel">

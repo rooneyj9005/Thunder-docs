@@ -38,9 +38,9 @@
                 <li class="nav-item"><a class="nav-link {% if page.url == '/features/' %}active{% endif %}" href="{{ '/features/' | relative_url }}" {% if page.url == '/features/' %}aria-current="page"{% endif %}>Features</a></li>
                 <li class="nav-item"><a class="nav-link {% if page.url == '/faq/' %}active{% endif %}" href="{{ '/faq/' | relative_url }}" {% if page.url == '/faq/' %}aria-current="page"{% endif %}>FAQ</a></li>
               </ul>
-              <div class="version-pill ms-lg-3 mt-3 mt-lg-0" data-version-status>
+              <div class="version-pill ms-lg-3 mt-3 mt-lg-0" data-version-status{% if site.pack_version %} data-state="release-only"{% endif %} role="status">
                 <span class="version-pill__dot"></span>
-                <span>Loading version status</span>
+                <span>{% if site.pack_version %}Stable release {{ site.pack_version }}{% else %}Checking version{% endif %}</span>
               </div>
             </div>
           </div>
@@ -62,8 +62,7 @@
     <script
       id="thunder-site-config"
       type="application/json"
-      data-release-url="{{ site.release_url | escape }}"
-      data-release-api-url="{{ 'https://api.github.com/repos/' | append: site.pack_repo_owner | append: '/' | append: site.pack_repo_name | append: '/releases/latest' | escape }}"
+      data-pack-version="{{ site.pack_version | escape }}"
       data-pack-toml-url="{{ site.packwiz_site_url | append: '/pack.toml' | escape }}"
       data-index-toml-url="{{ site.packwiz_site_url | append: '/index.toml' | escape }}"
     ></script>

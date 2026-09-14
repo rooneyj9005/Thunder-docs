@@ -1,13 +1,18 @@
 "use strict";
 
 (function () {
+  // A request that never settles is how the release note used to sit on
+  // "Checking latest stable release" for good. Everything here has a deadline,
+  // and everything it fills in is already rendered from _config.yml, so a slow
+  // or unreachable host costs a visitor nothing.
+  var FETCH_TIMEOUT_MS = 6000;
+
   function loadConfig() {
     var node = document.getElementById("thunder-site-config");
 
     if (node) {
       return {
-        releaseUrl: node.getAttribute("data-release-url") || "",
-        releaseApiUrl: node.getAttribute("data-release-api-url") || "",
+        packVersion: node.getAttribute("data-pack-version") || "",
         packTomlUrl: node.getAttribute("data-pack-toml-url") || "",
         indexTomlUrl: node.getAttribute("data-index-toml-url") || ""
       };
@@ -17,33 +22,34 @@
   }
 
   var config = loadConfig();
-  var latestReleasePromise = null;
   var packTomlPromise = null;
   var indexTomlPromise = null;
 
-  function fetchJson(url) {
-    return fetch(url).then(function (response) {
-      if (!response.ok) {
-        throw new Error(String(response.status));
-      }
-      return response.json();
-    });
-  }
-
   function fetchText(url) {
-    return fetch(url).then(function (response) {
-      if (!response.ok) {
-        throw new Error(String(response.status));
-      }
-      return response.text();
-    });
-  }
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = controller
+      ? setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT_MS)
+      : null;
 
-  function fetchLatestRelease() {
-    if (!latestReleasePromise) {
-      latestReleasePromise = fetchJson(config.releaseApiUrl);
+    function clear() {
+      if (timer) {
+        clearTimeout(timer);
+      }
     }
-    return latestReleasePromise;
+
+    return fetch(url, controller ? { signal: controller.signal } : undefined).then(
+      function (response) {
+        clear();
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        return response.text();
+      },
+      function (error) {
+        clear();
+        throw error;
+      }
+    );
   }
 
   function fetchFirstText(urls) {
@@ -74,42 +80,47 @@
     return indexTomlPromise;
   }
 
+  // The packwiz host is only ever written by a stable deploy, so the version it
+  // reports is the current stable release. That makes it a better source than
+  // the GitHub releases API, which is one shared host away from its sixty
+  // requests an hour and answered 403 on the download button when it ran out.
+  //
+  // Matches a top-level version key only. The [versions] table underneath holds
+  // forge and minecraft, neither of which is named "version".
+  function fetchPackVersion() {
+    return fetchPackToml().then(function (text) {
+      var match = text.match(/^version\s*=\s*"([^"]+)"/m);
+      return match ? match[1] : null;
+    });
+  }
+
   function countMods(indexTomlText) {
     var matches = indexTomlText.match(/^file\s*=\s*"mods\/[^"]+\.pw\.toml"$/gm);
     return matches ? matches.length : null;
   }
 
-  function updateDownloadCta() {
-    var link = document.querySelector("[data-download-link]");
+  // The download button is a plain release asset URL written into the markup, so
+  // it is correct before this script runs, without JavaScript at all, and while
+  // the pack host is unreachable. Only the note underneath is filled in here.
+  function updateReleaseNote() {
     var label = document.querySelector("[data-download-version]");
 
-    if (!link) {
+    if (!label) {
       return Promise.resolve();
     }
 
-    return fetchLatestRelease()
-      .then(function (release) {
-        var asset = Array.isArray(release.assets)
-          ? release.assets.find(function (item) {
-              return typeof item.name === "string" && item.name.endsWith(".mrpack");
-            })
-          : null;
-
-        if (asset && asset.browser_download_url) {
-          link.href = asset.browser_download_url;
-          if (label && release.tag_name) {
-            label.textContent = "Latest stable release: " + release.tag_name;
-          }
-          return;
+    return fetchPackVersion()
+      .then(function (version) {
+        if (version) {
+          label.textContent = "Latest stable release: v" + version;
         }
-
-        link.href = config.releaseUrl;
       })
-      .catch(function () {
-        link.href = config.releaseUrl;
-      });
+      .catch(function () {});
   }
 
+  // Rendered as "Stable release X" from the baked-in version, which claims only
+  // that the site was written for it. Reaching the host is what upgrades it to
+  // "is current", because only then is it known to still be true.
   function updateVersionStatus() {
     var target = document.querySelector("[data-version-status]");
 
@@ -117,42 +128,23 @@
       return Promise.resolve();
     }
 
-    return Promise.all([
-      fetchLatestRelease().catch(function () { return null; }),
-      fetchPackToml().catch(function () { return null; })
-    ]).then(function (results) {
-      var release = results[0];
-      var packToml = results[1];
-      var releaseVersion = release && release.tag_name ? String(release.tag_name).replace(/^v/i, "") : null;
-      var packMatch = packToml && packToml.match(/^version\s*=\s*"([^"]+)"/m);
-      var mainVersion = packMatch ? packMatch[1] : null;
+    return fetchPackVersion()
+      .then(function (version) {
+        if (!version) {
+          return;
+        }
 
-      if (releaseVersion && mainVersion) {
-        target.dataset.state = releaseVersion === mainVersion ? "in-sync" : "out-of-sync";
-        target.lastElementChild.textContent = releaseVersion === mainVersion
-          ? "Stable release " + releaseVersion + " is current"
-          : "Stable release " + releaseVersion + ", pack metadata " + mainVersion;
-        return;
-      }
+        target.dataset.state = "in-sync";
+        target.lastElementChild.textContent = "Stable release " + version + " is current";
+      })
+      .catch(function () {
+        if (config.packVersion) {
+          return;
+        }
 
-      if (releaseVersion) {
-        target.dataset.state = "release-only";
-        target.lastElementChild.textContent = "Latest stable release " + releaseVersion;
-        return;
-      }
-
-      if (mainVersion) {
-        target.dataset.state = "release-only";
-        target.lastElementChild.textContent = "Pack version " + mainVersion;
-        return;
-      }
-
-      if (!releaseVersion && !mainVersion) {
         target.dataset.state = "unavailable";
         target.lastElementChild.textContent = "Version status unavailable";
-        return;
-      }
-    });
+      });
   }
 
   function updateModCounts() {
@@ -178,7 +170,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    updateDownloadCta();
+    updateReleaseNote();
     updateVersionStatus();
     updateModCounts();
   });
