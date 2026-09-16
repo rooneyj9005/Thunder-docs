@@ -1,0 +1,22 @@
+# The site is LF throughout and two-space indented. This keeps it that way from
+# the editor rather than leaving it to whatever a checkout on Windows decides.
+
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Two trailing spaces are a hard line break in kramdown, so trimming them here
+# would quietly reflow a page.
+[*.md]
+trim_trailing_whitespace = false
+
+# Bundler writes this one. Leave it exactly as it lands.
+[Gemfile.lock]
+trim_trailing_whitespace = false
+insert_final_newline = false

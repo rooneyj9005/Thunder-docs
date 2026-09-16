@@ -11,7 +11,6 @@ pack_repo_name: Thunder
 pack_repo_url: "https://github.com/rooneyj9005/Thunder"
 packwiz_site_url: "https://packwiz.thunder.john.rooney.scot"
 release_url: "https://github.com/rooneyj9005/Thunder/releases"
-custom_domain: thunder.john.rooney.scot
 
 # The published release asset name, and the pack version this site is written
 # for. site.js replaces the version with whatever the packwiz host reports, so

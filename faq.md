@@ -9,7 +9,7 @@ description: Frequently asked questions about Thunder, including RAM, updates, m
     <div class="card-body">
       <span class="section-eyebrow">Common questions</span>
       <h1 class="page-title mb-3">Frequently asked questions</h1>
-      <p class="page-lead mb-0">If your question is not here, <a href="{{ site.pack_repo_url }}/issues">open an issue on the pack repository</a> and include the relevant log. Guesswork helps nobody.</p>
+      <p class="page-lead mb-0">If your question is not here, <a href="{{ site.pack_repo_url }}/issues/new/choose">open an issue on the pack repository</a>. The form asks for your pack version, launcher and log, because guesswork helps nobody.</p>
     </div>
   </section>
 
