@@ -1,0 +1,5 @@
+# The site is LF throughout, the same rule .editorconfig applies in the editor.
+# Without this, core.autocrlf=true leaves most of the tree as CRLF in the working
+# copy while the index holds LF, and the Gemfile.lock round trip the README warns
+# about is where that bites.
+* text=auto eol=lf

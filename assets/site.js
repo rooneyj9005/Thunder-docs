@@ -149,6 +149,7 @@
 
   function updateModCounts() {
     var nodes = document.querySelectorAll("[data-mod-count]");
+    var status = document.querySelector("[data-mod-count-status]");
 
     if (!nodes.length) {
       return Promise.resolve();
@@ -162,16 +163,90 @@
           return;
         }
 
+        var text = String(modCount);
+        var changed = false;
+
         nodes.forEach(function (node) {
-          node.textContent = String(modCount);
+          if (node.textContent !== text) {
+            node.textContent = text;
+            changed = true;
+          }
         });
+
+        // Silence when the baked-in fallback was already right, which is the
+        // usual case. There is nothing to tell anyone in that.
+        if (changed && status) {
+          status.textContent = "Mod count updated: Thunder has " + text + " mods.";
+        }
       })
       .catch(function () {});
+  }
+
+  // Bootstrap opens an accordion panel on click and on nothing else, so a link
+  // to a single answer, /faq/#faq-optifine, lands on a closed one. The hash may
+  // name the panel or its heading; both sit inside the same accordion item.
+  function hashAccordionItem() {
+    var hash = window.location.hash;
+
+    if (hash.length < 2) {
+      return null;
+    }
+
+    var id;
+
+    try {
+      id = decodeURIComponent(hash.slice(1));
+    } catch (error) {
+      return null;
+    }
+
+    var target = document.getElementById(id);
+
+    return target ? target.closest(".accordion-item") : null;
+  }
+
+  // A collapsed panel is display:none, so the browser's own jump to the fragment
+  // has nothing to aim at and leaves the page where it was. Opening the panel
+  // then moves everything below it. Both are why the scroll is done here.
+  function revealHashPanel(scrollNow) {
+    var item = typeof window.bootstrap === "undefined" ? null : hashAccordionItem();
+    var panel = item ? item.querySelector(".accordion-collapse") : null;
+
+    if (!panel) {
+      return;
+    }
+
+    // "instant" rather than "auto", which defers to the smooth scroll-behavior
+    // in site.css and would animate a landing that should already have happened.
+    function settle() {
+      item.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+
+    if (panel.classList.contains("show")) {
+      if (scrollNow) {
+        settle();
+      }
+      return;
+    }
+
+    panel.addEventListener("shown.bs.collapse", settle, { once: true });
+    window.bootstrap.Collapse.getOrCreateInstance(panel, { toggle: false }).show();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     updateReleaseNote();
     updateVersionStatus();
     updateModCounts();
+    revealHashPanel(false);
+  });
+
+  // The browser's fragment scroll can land after DOMContentLoaded, putting the
+  // page back where it started. Asserting it again here is what makes it stick.
+  window.addEventListener("load", function () {
+    revealHashPanel(true);
+  });
+
+  window.addEventListener("hashchange", function () {
+    revealHashPanel(true);
   });
 })();

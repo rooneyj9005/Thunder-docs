@@ -366,6 +366,12 @@ h3 {
   --bs-accordion-border-color: transparent;
 }
 
+/* A link to one answer scrolls the item to the top of the viewport, where the
+   sticky header would otherwise sit on top of it. */
+.accordion-item {
+  scroll-margin-top: 5.5rem;
+}
+
 .accordion-item + .accordion-item {
   margin-top: 0.9rem;
 }
@@ -383,8 +389,15 @@ h3 {
   box-shadow: none;
 }
 
+/* The ring here used to be rgba(166, 211, 109, 0.13), which is invisible
+   against the panel behind it. Keep a mouse click clean, and give the keyboard
+   a ring that clears 3:1. */
 .accordion-button:focus {
-  box-shadow: 0 0 0 0.22rem rgba(166, 211, 109, 0.13);
+  box-shadow: none;
+}
+
+.accordion-button:focus-visible {
+  box-shadow: 0 0 0 0.22rem rgba(166, 211, 109, 0.6);
 }
 
 .accordion-body {

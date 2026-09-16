@@ -11,9 +11,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
     <meta property="og:site_name" content="{{ site.title }}" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
     <meta name="twitter:description" content="{{ page.description | default: site.description }}" />
+    <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -50,6 +51,10 @@
       <main id="main-content" class="site-main flex-grow-1">
         {{ content }}
       </main>
+
+      <!-- The mod counts in the copy are filled in from the packwiz host after
+           the page has rendered. This is where a screen reader hears about it. -->
+      <p class="visually-hidden" data-mod-count-status role="status"></p>
 
       <footer class="site-footer py-5">
         <div class="container">

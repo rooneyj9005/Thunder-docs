@@ -5,7 +5,17 @@ baseurl: ""
 lang: en-GB
 markdown: kramdown
 permalink: pretty
-plugins: []
+plugins:
+  - jekyll-sitemap
+
+# Jekyll copies any file without front matter straight into _site, so without
+# these two, /README.md and /LICENSE answered 200 with raw markdown. Jekyll 4
+# appends its own defaults to this list rather than replacing them, so Gemfile
+# and Gemfile.lock are still excluded.
+exclude:
+  - README.md
+  - LICENSE
+
 pack_repo_owner: rooneyj9005
 pack_repo_name: Thunder
 pack_repo_url: "https://github.com/rooneyj9005/Thunder"
@@ -17,4 +27,4 @@ release_url: "https://github.com/rooneyj9005/Thunder/releases"
 # this is only what a visitor sees when that host cannot be reached. Keep it
 # broadly right rather than treating it as the source of truth.
 release_asset_name: Thunder.mrpack
-pack_version: "0.12.4"
+pack_version: "0.12.9"
