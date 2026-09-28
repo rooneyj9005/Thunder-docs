@@ -1,0 +1,23 @@
+# pages.yml pins every action to a commit, with the version beside it as a
+# comment, and Gemfile.lock pins the gems. This keeps both moving, one grouped
+# pull request a week for each, and a pull request builds the site without
+# deploying it.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      gems:
+        patterns:
+          - "*"

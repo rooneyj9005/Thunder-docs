@@ -102,6 +102,7 @@ description: Set up a Thunder server on Linux, Windows, or a Pterodactyl-compati
       <h2 class="section-title mb-3">Run the PowerShell installer in an empty folder</h2>
       <p class="page-lead mb-3">If Java 17 or 21 is missing, the script downloads Temurin 21 automatically before installing the rest of the server.</p>
       <pre class="thunder-code mb-3"><code>Invoke-WebRequest -Uri https://github.com/rooneyj9005/Thunder/releases/latest/download/install.ps1 -OutFile install.ps1
+Invoke-WebRequest -Uri https://github.com/rooneyj9005/Thunder/releases/latest/download/functions.ps1 -OutFile functions.ps1
 .\install.ps1
 Set-Content -LiteralPath eula.txt -Value "eula=true" -Encoding ASCII
 .\startup.ps1</code></pre>
