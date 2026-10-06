@@ -14,7 +14,7 @@ GEM
     eventmachine (1.2.7)
     ffi (1.17.4-x64-mingw-ucrt)
     ffi (1.17.4-x86_64-linux-gnu)
-    fiddle (1.1.6)
+    fiddle (1.1.8)
     forwardable-extended (2.6.0)
     google-protobuf (4.34.1-x64-mingw-ucrt)
       bigdecimal
@@ -87,7 +87,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  fiddle (= 1.1.6)
+  fiddle (= 1.1.8)
   jekyll (~> 4.4)
   jekyll-sitemap (~> 1.4)
   wdm (>= 0.1.0)
@@ -104,7 +104,7 @@ CHECKSUMS
   eventmachine (1.2.7) sha256=994016e42aa041477ba9cff45cbe50de2047f25dd418eba003e84f0d16560972
   ffi (1.17.4-x64-mingw-ucrt) sha256=f6ff9618cfccc494138bddade27aa06c74c6c7bc367a1ea1103d80c2fcb9ed35
   ffi (1.17.4-x86_64-linux-gnu) sha256=9d3db14c2eae074b382fa9c083fe95aec6e0a1451da249eab096c34002bc752d
-  fiddle (1.1.6) sha256=79e8d909e602d979434cf9fccfa6e729cb16432bb00e39c7596abe6bee1249ab
+  fiddle (1.1.8) sha256=7fa8ee3627271497f3add5503acdbc3f40b32f610fc1cf49634f083ef3f32eee
   forwardable-extended (2.6.0) sha256=1bec948c469bbddfadeb3bd90eb8c85f6e627a412a3e852acfd7eaedbac3ec97
   google-protobuf (4.34.1-x64-mingw-ucrt) sha256=8361420912aabb400a86b6e0a4baa99fa77b4b93d1fa0c5ddcd11c18969ba4d5
   google-protobuf (4.34.1-x86_64-linux-gnu) sha256=87088c9fd8e47b5b40ca498fc1195add6149e941ff7e81c532a5b0b8876d4cc9
